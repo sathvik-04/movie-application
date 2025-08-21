@@ -26,8 +26,9 @@ A modern movie search and discovery application built with **React, Vite, and Ta
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/<your-username>/movie-app.git
+git clone https://github.com/sathvik-04>/movie-application.git
 cd movie-app
+ ```
 
 
 🤝 Contributing
@@ -35,5 +36,7 @@ cd movie-app
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
+---
+
 ## 📜 License
-[MIT](LICENSE)
+This project is licensed under the [MIT License](LICENSE).
