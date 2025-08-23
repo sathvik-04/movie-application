@@ -1,4 +1,4 @@
-
+import { useDebounce } from 'react-use';
 
 
 import { useEffect, useState } from 'react'
@@ -20,12 +20,17 @@ const App = () => {
  const [errorMessage,setErrorMessage] = useState('');
  const[movieList,setMovieList]=useState([]); 
  const[isloading,setIsLoading]=useState(false);
+ const [debouncedsearchTerm,setDebouncedsearchTerm]= useState('');
 
-  const fetchMovies = async () => { 
+useDebounce(()=>setDebouncedsearchTerm(searchTerm),500,[searchTerm]);
+
+  const fetchMovies = async (query='') => { 
     setIsLoading(true);
     setErrorMessage('');
     try{
-      const endpoint=`${API_BASE_URL}/discover/movie?sort_by=popularity.desc`; 
+      const endpoint=query
+      ?`${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+      :`${API_BASE_URL}/discover/movie?sort_by=popularity.desc`; 
       const response = await fetch(endpoint, API_OPTIONS); 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -45,8 +50,8 @@ setMovieList(data.results||[]);
       setIsLoading(false); }
     }
   useEffect(()=> {
-  fetchMovies();
-  },[]);
+  fetchMovies(debouncedsearchTerm);
+  },[debouncedsearchTerm]);
 
   return (
     <main>
